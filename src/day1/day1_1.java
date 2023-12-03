@@ -1,10 +1,7 @@
 package day1;
 
-import org.apache.groovy.contracts.generation.TryCatchBlockGenerator;
-
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class day1_1 {
