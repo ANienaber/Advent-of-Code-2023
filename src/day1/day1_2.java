@@ -5,6 +5,22 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/*
+--- Part Two ---
+Your calculation isn't quite right. It looks like some of the digits are actually spelled out with
+letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+
+Equipped with this new information, you now need to find the real first and last digit on each line. For example:
+
+two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+ */
+
 public class day1_2 {
     public static void main(String[] args) throws FileNotFoundException {
         final long startTime = System.currentTimeMillis();
