@@ -20,4 +20,13 @@ public class utils {
         return lines;
     }
 
+    public static int getNumValue(String numString){
+        int num = 0;
+        for (int i = 0; i < numString.length(); i++) {
+            num *= 10;
+            num += Character.getNumericValue(numString.charAt(i));
+        }
+        return num;
+    }
+
 }
