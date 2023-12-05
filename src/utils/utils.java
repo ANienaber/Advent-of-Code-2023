@@ -20,13 +20,32 @@ public class utils {
         return lines;
     }
 
-    public static int getNumValue(String numString){
-        int num = 0;
+    public static long getNumValue(String numString){
+        long num = 0;
         for (int i = 0; i < numString.length(); i++) {
             num *= 10;
             num += Character.getNumericValue(numString.charAt(i));
         }
         return num;
+    }
+
+    public static long[] getNumValues(String line) {
+        String[] stringNums = line.split(" ");
+        long[] nums = new long[stringNums.length];
+
+        for (int i = 0; i < stringNums.length; i++) {
+            nums[i] = getNumValue(stringNums[i]);
+        }
+
+        return nums;
+    }
+
+    public static long getMinimum(long[] seeds) {
+        long min = Long.MAX_VALUE;
+        for (long num : seeds) {
+            min = Math.min(num, min);
+        }
+        return min;
     }
 
 }
