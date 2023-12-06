@@ -1,10 +1,8 @@
 package day4;
 
-import groovy.json.JsonOutput;
 import utils.utils;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -139,7 +137,7 @@ public class day4 {
         int points = 0;
         for ( String winningNumber : winningNumbers) {
             for ( String cardNumber : cardNumbers ) {
-                if((!cardNumber.equals("")) && (utils.getNumValue(winningNumber) == utils.getNumValue(cardNumber))){
+                if((!cardNumber.equals("")) && (utils.getLongNumValue(winningNumber) == utils.getLongNumValue(cardNumber))){
                     points = (points > 0) ? points * 2 : 1;
                 }
 
@@ -176,7 +174,7 @@ public class day4 {
         int count = 0;
         for ( String winningNumber : winningNumbers) {
             for ( String cardNumber : cardNumbers ) {
-                if((!cardNumber.equals("")) && (utils.getNumValue(winningNumber) == utils.getNumValue(cardNumber))){
+                if((!cardNumber.equals("")) && (utils.getLongNumValue(winningNumber) == utils.getLongNumValue(cardNumber))){
                     count++;
                 }
 
@@ -192,7 +190,4 @@ public class day4 {
         }
         return sum;
     }
-
-
-
 }
