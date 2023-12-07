@@ -10,15 +10,11 @@ import java.util.List;
 
 public class day7 {
     public static void main(String[] args) throws FileNotFoundException {
-        int solution = solve1("src/day7/test.txt");
+        int solution = solve("src/day7/input.txt");
         System.out.println("Solution to Part1 is: "+solution);
-
-
-        solution = solve2("src/day7/test.txt");
-        System.out.println("Solution to Part2 is: "+solution);
     }
 
-    private static int solve1(String path) throws FileNotFoundException {
+    private static int solve(String path) throws FileNotFoundException {
         List<String> lines = utils.readFile(path);
         int totalWinnings = 0;
         List<Hand> hands = new ArrayList<>();
@@ -31,12 +27,17 @@ public class day7 {
             hands.add(hand);
         }
 
-        hands = Collections.sort(hands);
+        for ( Hand hand: hands) {
+            if(hand.getType() == null){
+                System.out.println(hand.getCards());
+            }
+        }
+        Collections.sort(hands);
+
+        for (int i = 0; i < hands.size(); i++) {
+            totalWinnings += hands.get(i).getBid() * (i + 1);
+        }
+
         return totalWinnings;
-    }
-
-
-    private static int solve2(String path) {
-        return 0;
     }
 }
