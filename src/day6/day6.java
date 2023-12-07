@@ -8,11 +8,16 @@ import java.util.List;
 
 public class day6 {
     public static void main(String[] args) throws FileNotFoundException {
+        final long startTime = System.currentTimeMillis();
+
         long solution1 = solve(1);
         System.out.println("Solution to 1 is: "+solution1);
 
         long solution2 = solve(2);
         System.out.println("Solution to 2 is: "+solution2);
+
+        final long endTime = System.currentTimeMillis();
+        System.out.println("Total execution time in milliseconds: " + (endTime - startTime));
     }
 
     private static long solve(int num) throws FileNotFoundException {
