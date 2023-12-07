@@ -2,17 +2,14 @@ package day5;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 import utils.utils;
 
 public class day5 {
     public static void main(String[] args) throws FileNotFoundException {
-        //solve1();
+        solve1();
         solve2();
     }
 

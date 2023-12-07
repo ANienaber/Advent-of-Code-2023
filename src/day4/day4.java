@@ -148,7 +148,6 @@ public class day4 {
 
     private static void solvePart2() throws FileNotFoundException {
         List<String> lines = utils.readFile("src/day4/input4.txt");
-        int sum = 0;
         int[] numCopies = new int[lines.size()];
         //one of each card
         Arrays.fill(numCopies, 1);

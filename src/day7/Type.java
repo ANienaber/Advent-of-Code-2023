@@ -1,11 +1,11 @@
 package day7;
 
 public enum Type {
-    FiveOfAKind,
-    FourOfAKind,
-    FullHouse,
-    ThreeOfAKind,
-    TwoPair,
+    HighCard,
     OnePair,
-    HighCard
+    TwoPair,
+    ThreeOfAKind,
+    FullHouse,
+    FourOfAKind,
+    FiveOfAKind
 }

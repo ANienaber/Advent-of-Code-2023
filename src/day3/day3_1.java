@@ -2,12 +2,8 @@ package day3;
 
 import utils.utils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 /*
 --- Day 3: Gear Ratios ---
