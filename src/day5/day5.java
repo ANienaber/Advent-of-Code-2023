@@ -71,9 +71,9 @@ public class day5 {
 
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            long[] nums = utils.getLongNumValues(line);
-            long startRuleRange = nums[1];
-            long endRulesRange = nums[1] + nums[2];
+            //long[] nums = utils.getLongNumValues(line);
+            //long startRuleRange = nums[1];
+            // nums[1] + nums[2];
 
             if (Objects.equals(line, "")) {
                 i++;

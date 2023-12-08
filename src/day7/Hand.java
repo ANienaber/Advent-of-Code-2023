@@ -3,7 +3,6 @@ package day7;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class Hand implements Comparable<Hand>{
 
