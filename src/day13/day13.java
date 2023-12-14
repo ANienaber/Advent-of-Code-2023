@@ -10,9 +10,9 @@ public class day13 {
 
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Puzzle 1:-----------------------------------");
-        //solve1("src/day13/test.txt");
+        //solve1("src/day13/input.txt");
         System.out.println("Puzzle 2:-----------------------------------");
-        solve2("src/day13/test.txt");
+        solve2("src/day13/input.txt");
     }
 
     private static void solve1(String path) throws FileNotFoundException {
@@ -56,12 +56,13 @@ public class day13 {
     }
 
     private static int getSmudgeSum(List<String> set) {
-        Joker joker = new Joker(true);
-        int rowSum = getRowMirror(set, joker);
+        Joker jokerRow = new Joker(true);
+        Joker jokerCol = new Joker(true);
+        int rowSum = getRowMirror(set, jokerRow);
         if(rowSum > 0){
             return rowSum;
         } else {
-            return getColumnMirror(set, joker);
+            return getColumnMirror(set, jokerCol);
         }
     }
 
@@ -74,8 +75,9 @@ public class day13 {
         int mirrorIdx = 0;
         for (int i = mirrorIdx; i < set.size() - 1; i++) {
             joker.setJoker(startJoker);
-            System.out.println("Joker returned!");
+            //System.out.println("Joker returned!");
             if(rowMatches(set, i, i+1, joker)){
+                //System.out.println("New Mirror line found");
                 found = true;
                 mirrorIdx = i;
                 //check other line
@@ -90,9 +92,11 @@ public class day13 {
                     }
                 }
             }
-            if (found && !joker.isJoker()){
-                System.out.println("Mirror between row "+(mirrorIdx+1)+" and "+(mirrorIdx+2));
-                return 100 * (mirrorIdx +1);
+            if (found){
+                if(!joker.isJoker()) {
+                    System.out.println("Mirror between row "+(mirrorIdx+1)+" and "+(mirrorIdx+2));
+                    return 100 * (mirrorIdx +1);
+                } else found = false;
             }
         }
         System.out.println("Row not found");
@@ -106,7 +110,7 @@ public class day13 {
             if (row1.charAt(i) != row2.charAt(i)) {
                 if (joker.isJoker()){
                     joker.setJoker(false);
-                    System.out.println("Smudge has been fixed in row "+(i1+1)+" / "+(i2+1)+" and col "+(i+1));
+                    //System.out.println("Smudge has been fixed in row "+(i1+1)+" / "+(i2+1)+" and col "+(i+1));
                 } else return false;
             }
         }
@@ -122,6 +126,8 @@ public class day13 {
             joker.setJoker(startJoker);
             //if column matches
             if (colMatches(set, i, i + 1, joker)) {
+
+                //System.out.println("New Mirror line found");
                 found = true;
                 mirrorCol = i;
                 //check other columns
@@ -137,9 +143,11 @@ public class day13 {
                 }
             }
 
-            if (found && !joker.isJoker()) {
-                System.out.println("Mirror between col " + (mirrorCol+1) + " and " + (mirrorCol + 2));
-                return mirrorCol + 1;
+            if (found){
+                if(!joker.isJoker()) {
+                    System.out.println("Mirror between col " + (mirrorCol+1) + " and " + (mirrorCol + 2));
+                    return mirrorCol + 1;
+                } else found = false;
             }
         }
         System.out.println("Col not found");
@@ -154,7 +162,7 @@ public class day13 {
             if (s.charAt(col1) != s.charAt(col2)) {
                 if (joker.isJoker()){
                     joker.setJoker(false);
-                    System.out.println("Smudge has been fixed in col "+(col1+1)+" / "+(col2+1)+" and col "+(i+1));
+                    //System.out.println("Smudge has been fixed in col "+(col1+1)+" / "+(col2+1)+" and col "+(i+1));
                 } else return false;
             }
             i++;
