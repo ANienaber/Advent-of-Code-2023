@@ -1,15 +1,18 @@
 package day13;
 
+import day14.Joker;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class day13 {
+
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Puzzle 1:-----------------------------------");
-        solve1("src/day13/test.txt");
+        //solve1("src/day13/test.txt");
         System.out.println("Puzzle 2:-----------------------------------");
-        solve2("src/day13/input.txt");
+        solve2("src/day13/test.txt");
     }
 
     private static void solve1(String path) throws FileNotFoundException {
@@ -28,11 +31,12 @@ public class day13 {
     }
 
     private static int getSum(List<String> set) {
-        int rowSum = getRowMirror(set, false);
+        Joker joker = new Joker(false);
+        int rowSum = getRowMirror(set, joker);
         if(rowSum > 0){
             return rowSum;
         } else {
-            return getColumnMirror(set, false);
+            return getColumnMirror(set, joker);
         }
     }
 
@@ -52,22 +56,25 @@ public class day13 {
     }
 
     private static int getSmudgeSum(List<String> set) {
-        int rowSum = getRowMirror(set, true);
+        Joker joker = new Joker(true);
+        int rowSum = getRowMirror(set, joker);
         if(rowSum > 0){
             return rowSum;
         } else {
-            return getColumnMirror(set, true);
+            return getColumnMirror(set, joker);
         }
     }
 
 
 
-    private static int getRowMirror(List<String> set, boolean joker) {
-        boolean startJoker = joker;
+    private static int getRowMirror(List<String> set, Joker joker) {
+        int lol;
+        boolean startJoker = joker.isJoker();
         boolean found = false;
         int mirrorIdx = 0;
         for (int i = mirrorIdx; i < set.size() - 1; i++) {
-            joker = startJoker;
+            joker.setJoker(startJoker);
+            System.out.println("Joker returned!");
             if(rowMatches(set, i, i+1, joker)){
                 found = true;
                 mirrorIdx = i;
@@ -83,7 +90,7 @@ public class day13 {
                     }
                 }
             }
-            if (found){
+            if (found && !joker.isJoker()){
                 System.out.println("Mirror between row "+(mirrorIdx+1)+" and "+(mirrorIdx+2));
                 return 100 * (mirrorIdx +1);
             }
@@ -92,13 +99,13 @@ public class day13 {
         return 0;
     }
 
-    private static boolean rowMatches(List<String> set, int i1, int i2, boolean joker) {
+    private static boolean rowMatches(List<String> set, int i1, int i2, Joker joker) {
         String row1 = set.get(i1);
         String row2 = set.get(i2);
         for (int i = 0; i < row1.length(); i++) {
             if (row1.charAt(i) != row2.charAt(i)) {
-                if (joker){
-                    joker = false;
+                if (joker.isJoker()){
+                    joker.setJoker(false);
                     System.out.println("Smudge has been fixed in row "+(i1+1)+" / "+(i2+1)+" and col "+(i+1));
                 } else return false;
             }
@@ -106,13 +113,13 @@ public class day13 {
         return true;
     }
 
-    private static int getColumnMirror(List<String> set, boolean joker) {
-        boolean startJoker = joker;
+    private static int getColumnMirror(List<String> set, Joker joker) {
+        boolean startJoker = joker.isJoker();
         boolean found = false;
         int mirrorCol = 0;
         int lineLength = set.get(1).length();
         for (int i = mirrorCol; i < lineLength - 1; i++) {
-            joker = startJoker;
+            joker.setJoker(startJoker);
             //if column matches
             if (colMatches(set, i, i + 1, joker)) {
                 found = true;
@@ -130,7 +137,7 @@ public class day13 {
                 }
             }
 
-            if (found) {
+            if (found && !joker.isJoker()) {
                 System.out.println("Mirror between col " + (mirrorCol+1) + " and " + (mirrorCol + 2));
                 return mirrorCol + 1;
             }
@@ -141,12 +148,12 @@ public class day13 {
 
 
 
-    private static boolean colMatches(List<String> set, int col1, int col2, boolean joker) {
+    private static boolean colMatches(List<String> set, int col1, int col2, Joker joker) {
         int i = 0;
         for (String s : set) {
             if (s.charAt(col1) != s.charAt(col2)) {
-                if (joker){
-                    joker = false;
+                if (joker.isJoker()){
+                    joker.setJoker(false);
                     System.out.println("Smudge has been fixed in col "+(col1+1)+" / "+(col2+1)+" and col "+(i+1));
                 } else return false;
             }
@@ -160,7 +167,7 @@ public class day13 {
         List<List<String>> sets = new ArrayList<>();
         int startIdx = 0;
         for (int i = 0; i < lines.size(); i++) {
-            if (lines.get(i).equals("") || i == lines.size() - 1){
+            if (lines.get(i).isEmpty() || i == lines.size() - 1){
                 sets.add(new ArrayList<>(lines.subList(startIdx, i)));
                 startIdx = i+1;
             }
